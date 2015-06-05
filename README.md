@@ -6,7 +6,7 @@ Given the dataset located in ``data.json``, please construct a page in ``index.p
 
 1. ``data.json`` may not be physically manipulated in any way.
 2. Each member must appear in the table only once.
-3. If two members share the same birth year they be ordered alphabetically by last name.
+3. If two members share the same birth year they should be ordered alphabetically by last name.
 4. The page must run using the built in php server via ``php -S localhost:8888``.
 5. All properties in the dataset must be accounted for in the final table.
 
