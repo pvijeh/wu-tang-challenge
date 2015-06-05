@@ -1,0 +1,65 @@
+{
+  "data" : [
+    {
+      "_id" : 1,
+      "name" : "RZA",
+      "birthName" : "Robert Diggs",
+      "born" : "1969"
+    },
+    {
+      "_id" : 2,
+      "name" : "Ghostface Killah",
+      "birthName" : "Dennis Coles",
+      "born" : "1970"
+    },
+    {
+      "_id" : 3,
+      "name" : "GZA",
+      "birthName" : "Gary Grice",
+      "born" : "1966"
+    },
+    {
+      "_id" : 4,
+      "name" : "Inspectah Deck",
+      "birthName" : "Jason Hunter",
+      "born" : "1970"
+    },
+    {
+      "_id" : 5,
+      "name" : "Masta Killa",
+      "birthName" : "Elgin Turner",
+      "born" : "1969"
+    },
+    {
+      "_id" : 6,
+      "name" : "Method Man",
+      "birthName" : "Clifford Smith",
+      "born" : "1971"
+    },
+    {
+      "_id" : 7,
+      "name" : "Ol' Dirty Bastard",
+      "birthName" : "Russell Jones",
+      "born" : "1971",
+      "died" : "2004"
+    },
+    {
+      "_id" : 8,
+      "name" : "Raekwon",
+      "birthName" : "Corey Woods",
+      "born" : 1970
+    },
+    {
+      "_id" : 9,
+      "name" : "Cappadonna",
+      "birthName" : "Darryl Hill",
+      "born" : "1969"
+    },
+    {
+      "_id" : 10,
+      "name" : "GZA",
+      "birthName" : "Gary Grice",
+      "born" : "1966"
+    }
+  ]
+}
