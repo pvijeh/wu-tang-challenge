@@ -1,6 +1,6 @@
 #Wu Tang Challenge
 
-Given the following dataset located in ``data.json``, please construct a page in ``index.php`` displaying a table of Wu members ordered from oldest to youngest.
+Given the dataset located in ``data.json``, please construct a page in ``index.php`` displaying a table of Wu members ordered from oldest to youngest.
 
 ##Requirements
 
