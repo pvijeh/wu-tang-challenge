@@ -2,65 +2,69 @@
 
 (function(React, global) {
 
-var result;
-$.ajax({
-    url: '../data.json',
-    dataType: 'json',
-    async: false,
-    success: function(data) {
-        result = data;
-        console.log(result)
-    }
-});
+  // initialize global variable to store json data 
+  var result;
 
-var catOne = result.data;
-
-        mountNode = document.getElementById("originalGangsters");
-
-// renders table 
-// Child of: WuApp
-// Parent of: WuRow
-var WuTable = React.createClass({
-  render: function() {
-  var rows = [];
-
-  var OriginalGangstas = this.props.cat1;
-
-    // Gets the last name and adds it to data object
-   function addLastNameKey(){
-      for (var i =0, len = OriginalGangstas.length; i < len; i++){
-      var L = OriginalGangstas[i].birthName.split(" ");
-      OriginalGangstas[i].lastName = L[1];
+  // get data using jQuery AJAX call
+  $.ajax({
+      url: '../data.json',
+      dataType: 'json',
+      async: false,
+      success: function(data) {
+          result = data;
+          console.log(result)
       }
-  };
-
-  addLastNameKey();
-
-  // enable sort by multiple keys 
-  comp = function(a, b) {
-    if (a > b) return +1;
-    if (a < b) return -1;
-    return 0;
-  }
-
-  // sort by date born and last name 
-  var sortedGangstas = OriginalGangstas.sort(function(a, b) { 
-    return comp(a.born,b.born) || comp(a.lastName,b.lastName)
   });
 
-  // delete all duplicates from the array
-  for( var i=0; i<sortedGangstas.length-1; i++ ) {
-    if ( sortedGangstas[i].name == sortedGangstas[i+1].name ) {
-      delete sortedGangstas[i];
-    }
-  }
+  var compton = result.data;
 
-    // populates table with rows of Gangsters 
+  mountNode = document.getElementById("originalGangsters");
+
+  // renders table 
+  // Child of: WuApp
+  // Parent of: WuRow
+    var WuTable = React.createClass({
+      render: function() {
+      var rows = [];
+
+      var OriginalGangstas = this.props.cat1;
+
+        // Gets the last name and adds it to data object
+       function addLastNameKey(){
+          for (var i =0, len = OriginalGangstas.length; i < len; i++){
+          var L = OriginalGangstas[i].birthName.split(" ");
+          OriginalGangstas[i].lastName = L[1];
+        }
+    };
+
+    addLastNameKey();
+
+    // enable sort by multiple keys 
+    comp = function(a, b) {
+      if (a > b) return +1;
+      if (a < b) return -1;
+      return 0;
+    }
+
+    // sort by date born and last name 
+    var sortedGangstas = OriginalGangstas.sort(function(a, b) { 
+      return comp(a.born,b.born) || comp(a.lastName,b.lastName)
+    });
+
+    // delete all duplicates from the array
+    for( var i=0; i<sortedGangstas.length-1; i++ ) {
+      if ( sortedGangstas[i].name == sortedGangstas[i+1].name ) {
+        delete sortedGangstas[i];
+      }
+    }
+
+    // populates table with rows of data 
     sortedGangstas.forEach(function(item){
         rows.push(
             <WuRow item={item} key={item._id}/>
         );
     });
+
     return(
       <table>
         <thead>
@@ -107,16 +111,6 @@ var WuApp = React.createClass({
                 cat1: this.props.wuTang
             }
          },
-  // componentDidMount: function() {
-  //   alert('yay');
-  //   $.get(this.props.url, function() {
-  //     if (this.isMounted()) {
-  //       this.setState({
-  //         cat1: data,
-  //       });
-  //     }
-  //   }.bind(this));
-  // },
   render: function() {
     return (
       <div>
@@ -126,8 +120,6 @@ var WuApp = React.createClass({
   }
 });
 
-React.render(<WuApp wuTang={catOne}  />, mountNode);
-
-// React.render(<WuApp url={'data.json'}  />, mountNode);
+React.render(<WuApp wuTang={compton}  />, mountNode);
 
 })(window.React, window);
