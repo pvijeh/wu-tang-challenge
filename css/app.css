@@ -1,1 +1,111 @@
-/* base.css overrides */
+    
+    html{
+        padding:0;
+        margin:0;
+    }
+
+    table{
+        width:90%;
+        margin:5%;
+        text-align:center;
+        background-color:white;
+        border-collapse:collapse;
+    }
+    
+    td{
+        border:none;
+    }
+
+    tr {
+        height:50px;
+        line-height:1;
+    }
+
+    tr:nth-child(even) {background: #CCC}
+    tr:nth-child(odd) {background: #FFF}
+    
+    body{
+      margin:0;
+      position: relative;
+      background-color:black;
+	background: -moz-linear-gradient(50deg, rgb(0, 0, 0) 0%, rgb(41, 38, 0) 70%);
+	background: -webkit-linear-gradient(50deg, rgb(0, 0, 0) 0%, rgb(41, 38, 0) 70%);
+	background: -o-linear-gradient(50deg, rgb(0, 0, 0) 0%, rgb(41, 38, 0) 70%);
+	background: -ms-linear-gradient(50deg, rgb(0, 0, 0) 0%, rgb(41, 38, 0) 70%);
+	background: linear-gradient(140deg, rgb(0, 0, 0) 0%, rgb(41, 38, 0) 70%);
+      height:100vh;
+      width:100vw;
+      text-align: center;
+      font: 400 16px/24px "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    body:before{
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        height:100%;
+        width:100%;
+        content:"";
+        background-color:black;
+        z-index:10;
+        background-image:url('../Wu-tang-clan.jpg');
+        /*opacity:0;*/
+        background-size:50%;
+        background-position:center;
+        background-repeat: no-repeat;
+        -webkit-animation-duration: 3.0s;
+        -moz-animation-duration: 3.0s;
+        -ms-animation-duration: 3.0s;
+        -o-animation-duration: 3.0s;
+        animation-duration: 3.0s;
+        -webkit-animation-fill-mode: forwards;
+        -o-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+        -webkit-animation-name: bgfade;
+        -o-animation-name: bgfade;
+        animation-name: bgfade;
+    }
+
+    @-moz-keyframes bgfade {
+          0% { opacity:1; }
+          50% { opacity:1; }
+        100% { opacity:0; }
+        }
+
+    @-webkit-keyframes bgfade {
+          0% { opacity:1; }
+          50% { opacity:1; }
+        100% { opacity:0; }
+    }
+
+    @keyframes bgfade {
+          0% { opacity:1; }
+          50% { opacity:1; }
+        100% { opacity:0; }
+    }
+
+    thead{
+        color:white;
+        font-weight:800;
+    }
+
+    thead tr {
+        background-color:orange !important;
+    }
+
+    #originalGangsters{
+    position:relative;
+    z-index:2;
+    display:inline-block;
+    max-width:1050px;
+    width:100%;
+    }
+
+    @media (max-width: 767px) {
+        body{
+            font: 400 10px/16px "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    }
+

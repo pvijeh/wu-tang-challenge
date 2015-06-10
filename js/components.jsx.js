@@ -2,109 +2,76 @@
 
 (function(React, global) {
 
-        mountNode = document.getElementById("todoapp");
+var result;
+$.ajax({
+    url: '../data.json',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        result = data;
+        console.log(result)
+    }
+});
 
-var catOne =  [
-    {
-      "_id" : 1,
-      "name" : "RZA",
-      "birthName" : "Robert Diggs",
-      "born" : "1969"
-    },
-    {
-      "_id" : 2,
-      "name" : "Ghostface Killah",
-      "birthName" : "Dennis Coles",
-      "born" : "1970"
-    },
-    {
-      "_id" : 3,
-      "name" : "GZA",
-      "birthName" : "Gary Grice",
-      "born" : "1966"
-    },
-    {
-      "_id" : 4,
-      "name" : "Inspectah Deck",
-      "birthName" : "Jason Hunter",
-      "born" : "1970"
-    },
-    {
-      "_id" : 5,
-      "name" : "Masta Killa",
-      "birthName" : "Elgin Turner",
-      "born" : "1969"
-    },
-    {
-      "_id" : 6,
-      "name" : "Method Man",
-      "birthName" : "Clifford Smith",
-      "born" : "1971"
-    },
-    {
-      "_id" : 7,
-      "name" : "Ol' Dirty Bastard",
-      "birthName" : "Russell Jones",
-      "born" : "1971",
-      "died" : "2004"
-    },
-    {
-      "_id" : 8,
-      "name" : "Raekwon",
-      "birthName" : "Corey Woods",
-      "born" : 1970
-    },
-    {
-      "_id" : 9,
-      "name" : "Cappadonna",
-      "birthName" : "Darryl Hill",
-      "born" : "1969"
-    },
-    {
-      "_id" : 10,
-      "name" : "GZA",
-      "birthName" : "Gary Grice",
-      "born" : "1966"
-    }]; 
+var catOne = result.data;
 
-var CalcTable = React.createClass({
+        mountNode = document.getElementById("originalGangsters");
+
+// renders table 
+// Child of: WuApp
+// Parent of: WuRow
+var WuTable = React.createClass({
   render: function() {
-    var rows = [];
-    // var myVar 
+  var rows = [];
 
   var OriginalGangstas = this.props.cat1;
 
+    // Gets the last name and adds it to data object
    function addLastNameKey(){
-    
-    // var len = OriginalGangstas.length;
       for (var i =0, len = OriginalGangstas.length; i < len; i++){
       var L = OriginalGangstas[i].birthName.split(" ");
-      // console.log(L[1]);
       OriginalGangstas[i].lastName = L[1];
-      console.log(OriginalGangstas[i].lastName);
-
       }
   };
 
-addLastNameKey();
+  addLastNameKey();
 
-cmp = function(a, b) {
+  // enable sort by multiple keys 
+  comp = function(a, b) {
     if (a > b) return +1;
     if (a < b) return -1;
     return 0;
-}
+  }
 
-    var sortedGangstas = OriginalGangstas.sort(function(a, b) { 
-    return cmp(a.born,b.born) || cmp(a.lastName,b.lastName)
-})  
+  // sort by date born and last name 
+  var sortedGangstas = OriginalGangstas.sort(function(a, b) { 
+    return comp(a.born,b.born) || comp(a.lastName,b.lastName)
+  });
 
+  // delete all duplicates from the array
+  for( var i=0; i<sortedGangstas.length-1; i++ ) {
+    if ( sortedGangstas[i].name == sortedGangstas[i+1].name ) {
+      delete sortedGangstas[i];
+    }
+  }
+
+    // populates table with rows of Gangsters 
     sortedGangstas.forEach(function(item){
         rows.push(
-            <CalcRow item={item} key={item.id}/>
+            <WuRow item={item} key={item._id}/>
         );
     });
     return(
       <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>BirthName</td>
+                <td>Born</td>
+                <td>Died</td>
+            </tr>
+        </thead>
         <tbody>
             {rows}
         </tbody>
@@ -113,7 +80,10 @@ cmp = function(a, b) {
   }
 });
 
-var CalcRow = React.createClass({
+// renders row to go inside of WuTable 
+// Child of: WuTable
+// Parent of: None
+var WuRow = React.createClass({
   render: function() {
         return(
         <tr>
@@ -121,26 +91,43 @@ var CalcRow = React.createClass({
             <td>{this.props.item.name}</td>
             <td>{this.props.item.birthName}</td>
             <td>{this.props.item.born}</td>
+            <td>{this.props.item.died}</td>
         </tr>
         )
     }
 });
 
-var CalcApp = React.createClass({
-        getInitialState: function(){
+// renders the App with WuTable and WuRow components as descendant components  
+// Child of: None
+// Parent of: WuTable
+
+var WuApp = React.createClass({
+    getInitialState: function(){
             return{
                 cat1: this.props.wuTang
             }
          },
+  // componentDidMount: function() {
+  //   alert('yay');
+  //   $.get(this.props.url, function() {
+  //     if (this.isMounted()) {
+  //       this.setState({
+  //         cat1: data,
+  //       });
+  //     }
+  //   }.bind(this));
+  // },
   render: function() {
     return (
       <div>
-          <CalcTable  cat1={this.state.cat1}/>
+          <WuTable  cat1={this.state.cat1}/>
       </div>
     );
   }
 });
 
-React.render(<CalcApp wuTang={catOne}  />, mountNode);
+React.render(<WuApp wuTang={catOne}  />, mountNode);
+
+// React.render(<WuApp url={'data.json'}  />, mountNode);
 
 })(window.React, window);
